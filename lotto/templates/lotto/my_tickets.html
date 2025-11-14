@@ -1,2 +1,9 @@
 <h2>내 티켓</h2>
-<p><a>아직 티켓이 없습니다.</a></p>
+<ul>
+  {% for t in tickets %}
+    <li>{{ t.draw.number }}회 - {{ t.picks }} ({{ t.purchased_at|date:"Y-m-d H:i" }})
+        {% if t.is_auto %}[자동]{% else %}[수동]{% endif %}</li>
+  {% empty %}
+    <li>아직 구매 내역이 없습니다.</li>
+  {% endfor %}
+</ul>
