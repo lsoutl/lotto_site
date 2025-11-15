@@ -1,0 +1,12 @@
+<h2>{{ draw.number }}회 결과</h2>
+<p>추첨일: {{ draw.draw_date }} / 상태: {{ draw.status }}</p>
+<p>당첨번호: {{ draw.winning_numbers }}</p>
+
+<h3>당첨자</h3>
+<ul>
+  {% for t in winners %}
+    <li>{{ t.user.username }} - {{ t.picks }} → {{ t.rank }}등 ({{ t.match_count }}개 일치)</li>
+  {% empty %}
+    <li>당첨자가 없습니다.</li>
+  {% endfor %}
+</ul>

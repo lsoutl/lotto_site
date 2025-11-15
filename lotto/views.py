@@ -14,6 +14,11 @@ def my_tickets(request):
     tickets = Ticket.objects.filter(user=request.user).select_related("draw")
     return render(request, "lotto/my_tickets.html", {"tickets": tickets})
 
+def draw_result(request, draw):
+    d = get_object_or_404(Draw, number=draw)
+    winners = Ticket.objects.filter(draw=d, rank__gt=0).select_related("user").order_by("rank", "-purchased_at")
+    return render(request, "lotto/draw_result.html", {"draw": d, "winners": winners})
+
 @login_required
 def buy_auto(request, draw):
     d = get_object_or_404(Draw, number=draw, status="SCHEDULED")

@@ -21,6 +21,8 @@ class Ticket(models.Model):
     is_auto = models.BooleanField(default=True)
     picks = models.JSONField()             # ex) [3, 7, 11, 19, 28, 41]
     purchased_at = models.DateTimeField(auto_now_add=True)
+    match_count = models.PositiveSmallIntegerField(null=True, blank=True)  # 일치 개수
+    rank = models.PositiveSmallIntegerField(null=True, blank=True)         # 등수(1~4, 0=꽝)
 
     def __str__(self):
         return f"{self.user} - {self.draw.number}회"
